@@ -7,7 +7,7 @@ $(document).ready(function () {
 
         postForm($(this), function (response) {
             reloadList(response);
-            this.reset();
+            $(form).trigger("reset");
         });
 
         return false;

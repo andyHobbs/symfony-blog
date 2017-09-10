@@ -19,7 +19,8 @@ class CategoryController extends Controller
      * @Route("/category/store", name="category_store")
      *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @return mixed
      */
     public function storeAction(Request $request)
     {
@@ -44,11 +45,11 @@ class CategoryController extends Controller
     }
 
     /**
-     * @param Category $category
-     *
      * @Route("/category/{id}", name="category_show")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Category $category
+     *
+     * @return mixed
      */
     public function showAction(Category $category)
     {
@@ -63,6 +64,7 @@ class CategoryController extends Controller
      *
      * @param Request $request
      * @param Category $category
+     *
      * @return mixed
      */
     public function editAction(Request $request, Category $category)

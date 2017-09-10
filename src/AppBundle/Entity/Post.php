@@ -59,11 +59,10 @@ class Post
     /**
      * @var File
      *
-     * /**
      * @Assert\File(
      *     maxSize = "2048k",
-     *     mimeTypes = {"application/pdf", "application/image/png"},
-     *     mimeTypesMessage = "Please upload a valid PDF"
+     *     mimeTypes = {"application/pdf", "image/png"},
+     *     mimeTypesMessage = "Please upload a valid file"
      * )
      *
      * @Vich\UploadableField(mapping="post_files", fileNameProperty="attachment")

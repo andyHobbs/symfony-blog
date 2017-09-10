@@ -2,18 +2,18 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Category;
-use AppBundle\Entity\Comment;
 use AppBundle\Entity\Post;
 use AppBundle\Form\PostType;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use AppBundle\Entity\Comment;
+use AppBundle\Entity\Category;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
- * PageController
+ * PostController
  *
  * @author Andy Hobbs <andyhobbs92@gmail.com>
  */
@@ -45,6 +45,7 @@ class PostController extends Controller
      * @Route("/post/store", name="post_store")
      *
      * @param Request $request
+     *
      * @return mixed
      */
     public function storeAction(Request $request)
@@ -74,6 +75,7 @@ class PostController extends Controller
      *
      * @param Request $request
      * @param Post $post
+     *
      * @return mixed
      */
     public function editAction(Request $request, Post $post)
@@ -101,11 +103,11 @@ class PostController extends Controller
     }
 
     /**
-     * @param Post $post
-     *
      * @Route("/post/{id}", name="post_show")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Post $post
+     *
+     * @return mixed
      */
     public function showAction(Post $post)
     {
@@ -136,9 +138,9 @@ class PostController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @Route("/ajax/add-comment", name="ajax_add_comment")
+     *
+     * @param Request $request
      *
      * @throws BadRequestHttpException
      *

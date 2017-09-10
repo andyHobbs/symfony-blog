@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
 class PostRepository extends EntityRepository
 {
     /**
-     * Get latest Posts with Comment count
+     * Get Posts by parent Category
      *
      * @param Category $category
      *
@@ -32,7 +32,7 @@ class PostRepository extends EntityRepository
     /**
      * Get latest Posts with Comment count
      *
-     * @param $limit integer
+     * @param integer $limit
      *
      * @return Post[]
      */
