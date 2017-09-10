@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ category.name }} {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <p><a class="btn btn-success" href="{{ path('category_store') }}">Add new</a></p>
+
+                <div class="card">
+                    <div class="card-header">
+                        {{ category.name }}
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>{{ category.description }}</p>
+                            <footer class="blockquote-footer">Created at: <cite
+                                        title="{{ category.createdAt | date("H:i d.m.Y") }}">{{ category.createdAt | date("H:i d.m.Y") }}</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <p class="p-2 float-right">
+                    <a class="btn btn-primary" href="{{ path('category_edit', {'id':category.id}) }}">Update</a>
+                    <a class="btn btn-danger" href="{{ path('category_remove', {'id':category.id}) }}">Delete</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

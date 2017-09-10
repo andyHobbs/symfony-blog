@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <p>
+                    <a class="btn btn-warning" href="{{ path('post_store') }}">Add post</a>
+                    <a class="btn btn-light" href="{{ path('category_store') }}">Add category</a>
+                </p>
+                <ul class="list-group">
+                    {% for category in categories %}
+                        <li class="list-group-item">
+                            <a href="{{ path('homepage', {'id':category.id}) }}">{{ category.name }}</a>
+                            <a class="badge badge-light float-right" href="{{ path('category_show', {'id':category.id}) }}">show</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-9">
+                {% for post in posts %}
+                    <div class="m-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <b>{{ post.category.name }}</b> category:
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">{{ post.name }}</h4>
+                                <p class="card-text">{{ post.content }}</p>
+                                <a href="{{ path('post_show', {'id':post.id}) }}" class="btn btn-outline-secondary float-right">Detail</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                {{ post.createdAt | date("H:i, m F, Y") }}
+                                <a href="{{ path('post_show', {'id':post.id}) }}#comments" class="float-right">Comments: {{ post.comments|length }}</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
