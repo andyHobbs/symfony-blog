@@ -13,6 +13,7 @@
                         <li class="list-group-item">
                             <a href="{{ path('homepage', {'category':category.id}) }}">{{ category.name }}</a>
                             <a class="badge badge-light float-right" href="{{ path('category_show', {'id':category.id}) }}">show</a>
+                            <span class="badge badge-pill badge-info float-right">{{ category.comments | length }}</span>
                         </li>
                     {% endfor %}
                 </ul>
@@ -31,7 +32,7 @@
                             </div>
                             <div class="card-footer text-muted">
                                 {{ post.createdAt | date("H:i, m F, Y") }}
-                                <a href="{{ path('post_show', {'id':post.id}) }}#comments" class="float-right">Comments: {{ post.comments|length }}</a>
+                                <a href="{{ path('post_show', {'id':post.id}) }}#comments" class="float-right">Comments: {{ post.comments | length }}</a>
                             </div>
                         </div>
                     </div>

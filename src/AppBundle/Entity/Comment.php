@@ -14,6 +14,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Comment
 {
+
+    const PARENT_CATEGORY = 1;
+    const PARENT_POST = 2;
+
     /**
      * Hook timestampable behavior
      * updates createdAt, updatedAt fields
@@ -50,11 +54,20 @@ class Comment
     private $content;
 
     /**
-     * Many Comments have One Post.
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Post", inversedBy="comments")
-     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="comments")
+     * @ORM\JoinColumn(name="parent_category_id", referencedColumnName="id", nullable=true)
      */
-    private $post;
+    private $parentCategory;
+
+    /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Post", inversedBy="comments")
+     * @ORM\JoinColumn(name="parent_post_id", referencedColumnName="id", nullable=true)
+     */
+    private $parentPost;
 
     /**
      * Get id
@@ -113,27 +126,51 @@ class Comment
     }
 
     /**
-     * Set post
+     * Set category
      *
-     * @param Post $post
+     * @param Category $parentCategory
      *
      * @return Comment
      */
-    public function setPost(Post $post = null)
+    public function setParentCategory(Category $parentCategory = null)
     {
-        $this->post = $post;
+        $this->parentCategory = $parentCategory;
 
         return $this;
     }
 
     /**
-     * Get post
+     * Get parent category
      *
-     * @return Post
+     * @return integer
      */
-    public function getPost()
+    public function getParentCategory()
     {
-        return $this->post;
+        return $this->parentCategory;
+    }
+
+    /**
+     * Set post
+     *
+     * @param Post $parentPost
+     *
+     * @return Comment
+     */
+    public function setParentPost(Post $parentPost = null)
+    {
+        $this->parentPost = $parentPost;
+
+        return $this;
+    }
+
+    /**
+     * Get parent post
+     *
+     * @return integer
+     */
+    public function getParentPost()
+    {
+        return $this->parentPost;
     }
 
 }

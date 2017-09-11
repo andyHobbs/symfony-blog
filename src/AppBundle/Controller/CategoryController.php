@@ -54,7 +54,8 @@ class CategoryController extends Controller
     public function showAction(Category $category)
     {
         return $this->render('AppBundle::category/show.html.twig', [
-            'category' => $this->getDoctrine()->getRepository('AppBundle:Category')->find($category)
+            'category' => $this->getDoctrine()->getRepository('AppBundle:Category')->find($category),
+            'type' => Category::class
         ]);
 
     }

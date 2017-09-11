@@ -4,10 +4,10 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Post;
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -29,8 +29,8 @@ class PostType extends AbstractType
                 'choice_label' => 'name',
             ])
             ->add('content', TextareaType::class)
-            ->add('attachment', FileType::class, [
-                'data_class' => null
+            ->add('attachmentFile', VichFileType::class, [
+                'required' => false
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Add post',

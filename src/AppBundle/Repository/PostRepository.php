@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Category;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -38,7 +39,9 @@ class PostRepository extends EntityRepository
      */
     public function getLatestPosts($limit = 20)
     {
-        return $this->createQueryBuilder('p')
+        $qb = $this->createQueryBuilder('p');
+
+        return $qb
             ->orderBy('p.createdAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()

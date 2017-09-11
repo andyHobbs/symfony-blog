@@ -1,0 +1,11 @@
+<div class="list-group">
+    {% for comment in comments %}
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ comment.author }}</h5>
+                <small>{{ comment.createdAt | date("H:i d.m.Y") }}</small>
+            </div>
+            <p class="mb-1">{{ comment.content }}</p>
+        </div>
+    {% endfor %}
+</div>

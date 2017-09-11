@@ -51,10 +51,16 @@ class Category
     private $posts;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="parentCategory", cascade={"remove"})
+     */
+    private $comments;
+
+    /**
      * Category constructor.
      */
     public function __construct() {
         $this->posts = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -111,6 +117,26 @@ class Category
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 
 }

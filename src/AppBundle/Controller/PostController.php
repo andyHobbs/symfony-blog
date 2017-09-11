@@ -112,7 +112,8 @@ class PostController extends Controller
     public function showAction(Post $post)
     {
         return $this->render('AppBundle::post/show.html.twig', [
-            'post' => $this->getDoctrine()->getRepository('AppBundle:Post')->find($post)
+            'post' => $this->getDoctrine()->getRepository('AppBundle:Post')->find($post),
+            'type' => Post::class
         ]);
 
     }
@@ -135,45 +136,5 @@ class PostController extends Controller
         $em->flush();
 
         return $this->redirect($this->generateUrl('homepage'));
-    }
-
-    /**
-     * @Route("/ajax/add-comment", name="ajax_add_comment")
-     *
-     * @param Request $request
-     *
-     * @throws BadRequestHttpException
-     *
-     * @return JsonResponse
-     */
-    public function ajaxAddComment(Request $request)
-    {
-
-        if (!$request->isXmlHttpRequest()) {
-            throw new BadRequestHttpException('Bad Request');
-        }
-
-        $em = $this->getDoctrine()->getManager();
-
-        $author  = $request->get('author');
-        $content = $request->get('content');
-        $postId = $request->get('post');
-        $post = $em->getRepository('AppBundle:Post')->find($postId);
-
-        $comment = (new Comment())
-            ->setPost($post)
-            ->setAuthor($author)
-            ->setContent($content);
-
-        $em->persist($comment);
-        $em->flush();
-
-        return new JsonResponse([
-            'author' => $comment->getAuthor(),
-            'content' => $comment->getContent(),
-            'time' => $comment->getCreatedAt()->format('H:i d-m-Y'),
-            'status'  => true,
-            'message' => 'Success',
-        ]);
     }
 }

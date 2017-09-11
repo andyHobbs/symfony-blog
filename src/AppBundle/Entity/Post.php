@@ -52,7 +52,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $attachment;
 
@@ -60,9 +60,7 @@ class Post
      * @var File
      *
      * @Assert\File(
-     *     maxSize = "2048k",
-     *     mimeTypes = {"application/pdf", "image/png"},
-     *     mimeTypesMessage = "Please upload a valid file"
+     *     maxSize = "2048k"
      * )
      *
      * @Vich\UploadableField(mapping="post_files", fileNameProperty="attachment")
@@ -77,15 +75,15 @@ class Post
     private $category;
 
     /**
-     * One Post has Many Comments.
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="post", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="parentPost", cascade={"remove"})
      */
     private $comments;
 
     /**
-     * Category constructor.
+     * Post constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->comments = new ArrayCollection();
     }
 
